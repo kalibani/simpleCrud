@@ -1,0 +1,17 @@
+{
+  "name": "simpleCrud",
+  "displayName": "simpleCrud",
+  "expo": {
+    "name": "simpleCrud",
+    "slug": "simpleCrud",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
