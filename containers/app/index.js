@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { AppLoading } from 'expo';
 import { Container, Text } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
-import * as SplashScreen from 'expo-splash-screen';
+import Home from '../pages/Home';
 
 export default function App() {
   const [isReady, setReady] = React.useState(false);
@@ -26,7 +25,7 @@ export default function App() {
 
   return (
     <Container>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Home />
     </Container>
   );
 }
