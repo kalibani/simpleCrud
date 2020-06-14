@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { Table, TableWrapper, Row, Rows } from 'react-native-table-component';
  
 export default class ExampleTwo extends Component {
@@ -7,7 +7,7 @@ export default class ExampleTwo extends Component {
     super(props);
     this.state = {
       tableHead: ['No Container', 'Size', 'Type', 'Slot', 'Row', 'Tier'],
-      widthArr: [100, 40, 80, 52, 52, 54],
+      widthArr: [100, 40, 60, 54, 54, 54],
     }
   }
  
@@ -16,17 +16,25 @@ export default class ExampleTwo extends Component {
     const { tableData } = this.props;
     return (
       <View style={styles.container}>
-        <Table borderStyle={{borderWidth: 1}}>
-          <Row data={state.tableHead} widthArr={state.widthArr} style={styles.head} textStyle={styles.text}/>
-          <TableWrapper style={styles.wrapper}>
-            <Rows 
-              data={tableData} 
-              widthArr={state.widthArr} 
-              style={styles.row} 
-              textStyle={styles.text}
-            />
-          </TableWrapper>
-        </Table>
+        <ScrollView horizontal={true}>
+          <View>
+            <Table borderStyle={{borderWidth: 1}}>
+              <Row
+                data={state.tableHead} 
+                widthArr={state.widthArr} 
+                style={styles.head} 
+                textStyle={styles.text}/>
+                <TableWrapper style={styles.wrapper}>
+                  <Rows 
+                    data={tableData} 
+                    widthArr={state.widthArr} 
+                    style={styles.row} 
+                    textStyle={styles.text}
+                  />
+                </TableWrapper>
+            </Table>
+          </View>
+        </ScrollView>
       </View>
     )
   }
