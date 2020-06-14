@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 
 const Input = ({ 
-  value, label, marginRight, width, handleChange, attrName 
+  value, label, marginRight, width, handleChange, attrName, editable
 }) => {
 
   const handleChangeText = (updatedValue) => {
@@ -19,6 +19,7 @@ const Input = ({
         style={[styles.textInput, { width: width }]}
         onChangeText={handleChangeText}
         value={value}
+        editable={editable}
       />
     </View>
   );
@@ -32,12 +33,12 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   text: {
-    top: 0,
+    top: 3,
     marginRight: 10,
     fontSize: 16
   },
   textInput : {
-    width: 200,
+    width: 150,
     height: 35, 
     borderColor: 'gray', 
     borderWidth: 1,
@@ -57,7 +58,8 @@ Input.propTypes = {
 
 Input.defaultProps = {
   marginRight: 10,
-  width: 200
+  width: 200,
+  editable: true
 }
 
 

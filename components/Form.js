@@ -1,28 +1,8 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import Input from './Input'
 
-const  Form = () => {
-  const [form, setValue] = useState({
-    noContainer: '',
-    size: '',
-    type: '',
-    slot: '',
-    row: '',
-    tier: ''
-  })
-
-  const handleChangeText = (attrName, value) => {
-    setValue({
-      ...form,
-      [attrName]: value
-    });
-  }
-
-  const onPress = () => {
-    console.log(form.noContainer)
-  }
-
+const  Form = ({dataForm, handleChangeText, formType}) => {
 
   return (
     <View style={styles.formWrapper}>
@@ -30,27 +10,33 @@ const  Form = () => {
         attrName='noContainer'
         label='No Container' 
         handleChange={(attrName, value) => handleChangeText(attrName, value)}
-        value={form.noContainer}
+        value={dataForm.noContainer}
+        width={150}
+        editable={formType === 'update' ? false : true}
       />
       <Input
         attrName='size'
         label='Size' 
         handleChange={(attrName, value) => handleChangeText(attrName, value)} 
-        value={form.size}
+        value={dataForm.size}
         marginRight={73}
+        width={150}
+        editable={formType === 'update' ? false : true}
       />
       <Input
         attrName='type'
         label='Type' 
         handleChange={(attrName, value) => handleChangeText(attrName, value)} 
-        value={form.type}
+        value={dataForm.type}
         marginRight={68}
+        width={150}
+        editable={formType === 'update' ? false : true}
       />
       <Input
         attrName='slot'
         label='Slot'
         handleChange={(attrName, value) => handleChangeText(attrName, value)} 
-        value={form.slot}
+        value={dataForm.slot}
         width={100}
         marginRight={74}
       />
@@ -58,7 +44,7 @@ const  Form = () => {
         attrName='row'
         label='Row'
         handleChange={(attrName, value) => handleChangeText(attrName, value)} 
-        value={form.row}
+        value={dataForm.row}
         width={100}
         marginRight={70}
       />
@@ -66,20 +52,10 @@ const  Form = () => {
         attrName='tier'
         label='Tier'
         handleChange={(attrName, value) => handleChangeText(attrName, value)} 
-        value={form.tier}
+        value={dataForm.tier}
         width={100}
         marginRight={73}
       />
-
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={onPress}
-        >
-          <Text>Press Here</Text>
-        </TouchableOpacity>
-    </View>
-
     </View>
   );
 }

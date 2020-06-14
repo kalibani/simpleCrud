@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import {
   Alert,
   Modal,
@@ -8,10 +8,19 @@ import {
   View
 } from "react-native";
 
+import { Icon } from 'native-base';
+
 import Form from './Form';
 
-const App = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+const App = ({ 
+  modalVisible, 
+  setModalVisible, 
+  dataForm, 
+  handleChangeText,
+  handleClick,
+  formType
+ }) => {
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -23,28 +32,44 @@ const App = () => {
         }}
       >
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Form />
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </TouchableHighlight>
+          <View style={[styles.modalView, { height: formType === 'delete' ? 200 : 400 }]}>
+            {
+              formType !== 'delete' ? (
+                <Form 
+                  handleChangeText={handleChangeText}
+                  dataForm={dataForm}
+                  formType={formType}
+                />
+              ) : (
+                <View>
+                  <Text style={styles.textStyle}>Alert</Text>
+                  <Text style={styles.textStyle}>Yakin Hapus Data</Text>
+                </View>
+              )
+            }
+            <View style={styles.actionWrapper}>
+              <TouchableHighlight 
+                onPress={setModalVisible}>
+                  {
+                    formType !== 'delete' ? 
+                    <Icon type="FontAwesome" name="close" /> :
+                    <Text style={styles.actionText}>No</Text>
+                  }
+                
+              </TouchableHighlight>
+              <TouchableHighlight 
+                onPress={() => handleClick(dataForm)}
+              >
+                {
+                  formType !== 'delete' ?
+                  <Icon type="FontAwesome" name="check" /> :
+                  <Text style={styles.actionText}>Yes</Text>
+                }
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
       </Modal>
-
-      <TouchableHighlight
-        style={styles.openButton}
-        onPress={() => {
-          setModalVisible(true);
-        }}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </TouchableHighlight>
     </View>
   );
 };
@@ -56,11 +81,12 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   modalView: {
-    width: 350,
+    width: 300,
+    height: 400,
     margin: 20,
     backgroundColor: "white",
     // borderRadius: 20,
-    padding: 30,
+    padding: 20,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -69,7 +95,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
+    marginTop: 20
   },
   openButton: {
     backgroundColor: "#F194FF",
@@ -78,13 +105,28 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   textStyle: {
-    color: "white",
-    fontWeight: "bold",
+    fontSize: 20,
     textAlign: "center"
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center"
+  },
+  actionWrapper: {
+    display: 'flex',
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: 10,
+    marginTop: 30
+  },
+  actionText: {
+    width: 100,
+    textAlign: 'center',
+    padding: 10,
+    borderColor: 'grey',
+    borderWidth: 1,
+    fontSize: 16
   }
 });
 
